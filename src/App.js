@@ -3,10 +3,6 @@ import Nav from "./components/Nav";
 import Form from "./components/Form";
 import PeopleList from "./components/PeopleList";
 
-function Home() {
-  return null;
-}
-
 function App() {
   return (
     <div className="App">
