@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
 import Nav from "./components/Nav";
-import Form from "./components/Form";
-import PeopleList from "./components/PeopleList";
+import New from "./components/New";
 
 function App() {
   return (
@@ -9,8 +9,8 @@ function App() {
       <Router>
         <Nav />
         <Routes>
-          <Route path="/" element={<PeopleList />} />
-          <Route path="/form" element={<Form />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/new" element={<New />} />
         </Routes>
       </Router>
     </div>

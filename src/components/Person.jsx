@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function Person({ id, firstName, lastName, address, refresh }) {
+function Person({ id, firstName, lastName, address, toggle }) {
   const [editMode, setEditMode] = useState(false);
   const [editingPerson, setEditingPerson] = useState({
     praenomens: [firstName],
@@ -30,20 +30,20 @@ function Person({ id, firstName, lastName, address, refresh }) {
     }
   };
 
-  const onEditSubmit = async (e, id) => {
+  const onSubmit = async (e, id) => {
     e.preventDefault();
 
-    const res = axios.patch(
+    const res = await axios.patch(
       `http://localhost:8080/api/v1/people/${id}`,
       editingPerson
     );
     console.log(res);
-    refresh();
+    toggle();
     setEditMode(false);
   };
 
   const cancelHandler = () => {
-    setEditMode(false);
+    setEditMode(!editMode);
     setEditingPerson({
       praenomens: [firstName],
       cognomen: lastName,
@@ -55,98 +55,97 @@ function Person({ id, firstName, lastName, address, refresh }) {
     });
   };
 
-  const deleteHandler = async (e, id) => {
+  const onDelete = async (e, id) => {
     e.preventDefault();
 
     const res = await axios.delete("http://localhost:8080/api/v1/people/" + id);
     console.log(res);
-    refresh();
+    toggle();
   };
 
   return (
     <>
       {!editMode ? (
-        <div>
+        <>
           <h1>
-            {id}: {firstName} {lastName}
+            {praenomens} {cognomen}
           </h1>
           <p>
-            {number} {street}
+            {number} {street} {city} {state} {zip}
           </p>
-          <p>
-            {city} {state} {zip}
-          </p>
-          <button onClick={() => setEditMode(true)}>Edit</button>
-          <button onClick={(e) => deleteHandler(e, id)}>Delete</button>
-        </div>
+          <button onClick={() => setEditMode(!editMode)}>Edit</button>
+          <button onClick={(e) => onDelete(e, id)}>Delete</button>
+        </>
       ) : (
-        <form onSubmit={(e) => onEditSubmit(e, id)}>
-          <input
-            type="text"
-            name="praenomens"
-            id="praenomens"
-            value={praenomens}
-            onChange={onChange}
-            placeholder="Praenomens"
-            required
-          />
-          <input
-            type="text"
-            name="cognomen"
-            id="cognomen"
-            value={cognomen}
-            onChange={onChange}
-            placeholder="Cognomen"
-            required
-          />
-          <input
-            type="text"
-            name="number"
-            id="number"
-            value={number}
-            onChange={onChange}
-            placeholder="Number"
-            required
-          />
-          <input
-            type="text"
-            name="street"
-            id="street"
-            value={street}
-            onChange={onChange}
-            placeholder="Street"
-            required
-          />
-          <input
-            type="text"
-            name="city"
-            id="city"
-            value={city}
-            onChange={onChange}
-            placeholder="City"
-            required
-          />
-          <input
-            type="text"
-            name="state"
-            id="state"
-            value={state}
-            onChange={onChange}
-            placeholder="State"
-            required
-          />
-          <input
-            type="text"
-            name="zip"
-            id="zip"
-            value={zip}
-            onChange={onChange}
-            placeholder="Zip"
-            required
-          />
-          <button>Submit Edit</button>
-          <button onClick={cancelHandler}>Cancel</button>
-        </form>
+        <>
+          <form onSubmit={(e) => onSubmit(e, id)}>
+            <input
+              type="text"
+              name="praenomens"
+              id="praenomens"
+              onChange={onChange}
+              value={praenomens}
+              placeholder="Praenomens"
+              required
+            />
+            <input
+              type="text"
+              name="cognomen"
+              id="cognomen"
+              onChange={onChange}
+              value={cognomen}
+              placeholder="Cognomen"
+              required
+            />
+            <input
+              type="text"
+              name="number"
+              id="number"
+              onChange={onChange}
+              value={number}
+              placeholder="Number"
+              required
+            />
+            <input
+              type="text"
+              name="street"
+              id="street"
+              onChange={onChange}
+              value={street}
+              placeholder="Street"
+              required
+            />
+            <input
+              type="text"
+              name="city"
+              id="city"
+              onChange={onChange}
+              value={city}
+              placeholder="City"
+              required
+            />
+            <input
+              type="text"
+              name="state"
+              id="state"
+              onChange={onChange}
+              value={state}
+              placeholder="State"
+              required
+            />
+            <input
+              type="text"
+              name="zip"
+              id="zip"
+              onChange={onChange}
+              value={zip}
+              placeholder="Zip"
+              required
+            />
+            <button>Submit</button>
+            <button onClick={cancelHandler}>Cancel</button>
+          </form>
+        </>
       )}
     </>
   );
