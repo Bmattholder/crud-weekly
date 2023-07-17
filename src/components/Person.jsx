@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function Person({ id, firstName, lastName, address, toggle }) {
+function Person({ id, firstName, lastName, address, refresh }) {
   const [editMode, setEditMode] = useState(false);
   const [editingPerson, setEditingPerson] = useState({
     praenomens: [firstName],
@@ -12,9 +12,6 @@ function Person({ id, firstName, lastName, address, toggle }) {
     state: address.state,
     zip: address.zip,
   });
-
-  const { praenomens, cognomen, number, street, city, state, zip } =
-    editingPerson;
 
   const onChange = (e) => {
     if (e.target.name === "praenomens") {
@@ -38,7 +35,7 @@ function Person({ id, firstName, lastName, address, toggle }) {
       editingPerson
     );
     console.log(res);
-    toggle();
+    refresh();
     setEditMode(false);
   };
 
@@ -55,12 +52,15 @@ function Person({ id, firstName, lastName, address, toggle }) {
     });
   };
 
+  const { praenomens, cognomen, number, street, city, state, zip } =
+    editingPerson;
+
   const onDelete = async (e, id) => {
     e.preventDefault();
 
     const res = await axios.delete("http://localhost:8080/api/v1/people/" + id);
     console.log(res);
-    toggle();
+    refresh();
   };
 
   return (

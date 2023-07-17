@@ -7,12 +7,12 @@ function PeopleList(props) {
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
-    const getData = async () => {
+    const getPeople = async () => {
       const res = await axios.get("http://localhost:8080/api/v1/people");
       const data = res.data;
       setPeopleList(data.content);
     };
-    getData();
+    getPeople();
   }, [refresh]);
 
   const refreshHelper = () => {

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Form(props) {
   const [formData, setFormData] = useState({
-    praenomens: [""],
+    praenomens: [],
     cognomen: "",
     number: "",
     street: "",
@@ -31,7 +31,7 @@ function Form(props) {
     }
   };
 
-  const onFormSubmit = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     const res = await axios.post(
@@ -43,68 +43,68 @@ function Form(props) {
   };
 
   return (
-    <form onSubmit={onFormSubmit}>
+    <form onSubmit={onSubmit}>
       <input
         type="text"
         name="praenomens"
         id="praenomens"
+        placeholder="Praenomens"
         value={praenomens}
         onChange={onChange}
-        placeholder="Praenomens"
         required
       />
       <input
         type="text"
         name="cognomen"
         id="cognomen"
+        placeholder="Cognomen"
         value={cognomen}
         onChange={onChange}
-        placeholder="Cognomen"
         required
       />
       <input
         type="text"
         name="number"
         id="number"
+        placeholder="Number"
         value={number}
         onChange={onChange}
-        placeholder="Number"
         required
       />
       <input
         type="text"
         name="street"
         id="street"
+        placeholder="Street"
         value={street}
         onChange={onChange}
-        placeholder="Street"
         required
       />
       <input
         type="text"
         name="city"
         id="city"
+        placeholder="City"
         value={city}
         onChange={onChange}
-        placeholder="City"
         required
       />
       <input
         type="text"
         name="state"
         id="state"
+        placeholder="State"
         value={state}
         onChange={onChange}
-        placeholder="State"
         required
       />
       <input
         type="text"
         name="zip"
         id="zip"
+        placeholder="Zip"
         value={zip}
         onChange={onChange}
-        placeholder="Zip"
         required
       />
       <button>Submit</button>
