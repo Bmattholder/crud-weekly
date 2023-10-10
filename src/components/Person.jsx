@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import axios from "axios";
+import axios from 'axios';
+import React, { useState } from 'react';
 
 function Person({ id, firstName, lastName, address, refresh }) {
   const [editMode, setEditMode] = useState(false);
@@ -14,7 +14,7 @@ function Person({ id, firstName, lastName, address, refresh }) {
   });
 
   const onChange = (e) => {
-    if (e.target.name === "praenomens") {
+    if (e.target.name === 'praenomens') {
       setEditingPerson((p) => ({
         ...p,
         [e.target.name]: e.target.value.split(),
@@ -30,11 +30,10 @@ function Person({ id, firstName, lastName, address, refresh }) {
   const onSubmit = async (e, id) => {
     e.preventDefault();
 
-    const res = await axios.patch(
+    await axios.patch(
       `http://localhost:8080/api/v1/people/${id}`,
       editingPerson
     );
-    console.log(res);
     refresh();
     setEditMode(false);
   };
@@ -58,8 +57,7 @@ function Person({ id, firstName, lastName, address, refresh }) {
   const onDelete = async (e, id) => {
     e.preventDefault();
 
-    const res = await axios.delete("http://localhost:8080/api/v1/people/" + id);
-    console.log(res);
+    await axios.delete(`http://localhost:8080/api/v1/people/${id}`);
     refresh();
   };
 
@@ -80,66 +78,66 @@ function Person({ id, firstName, lastName, address, refresh }) {
         <>
           <form onSubmit={(e) => onSubmit(e, id)}>
             <input
-              type="text"
-              name="praenomens"
-              id="praenomens"
+              type='text'
+              name='praenomens'
+              id='praenomens'
               onChange={onChange}
               value={praenomens}
-              placeholder="Praenomens"
+              placeholder='Praenomens'
               required
             />
             <input
-              type="text"
-              name="cognomen"
-              id="cognomen"
+              type='text'
+              name='cognomen'
+              id='cognomen'
               onChange={onChange}
               value={cognomen}
-              placeholder="Cognomen"
+              placeholder='Cognomen'
               required
             />
             <input
-              type="text"
-              name="number"
-              id="number"
+              type='text'
+              name='number'
+              id='number'
               onChange={onChange}
               value={number}
-              placeholder="Number"
+              placeholder='Number'
               required
             />
             <input
-              type="text"
-              name="street"
-              id="street"
+              type='text'
+              name='street'
+              id='street'
               onChange={onChange}
               value={street}
-              placeholder="Street"
+              placeholder='Street'
               required
             />
             <input
-              type="text"
-              name="city"
-              id="city"
+              type='text'
+              name='city'
+              id='city'
               onChange={onChange}
               value={city}
-              placeholder="City"
+              placeholder='City'
               required
             />
             <input
-              type="text"
-              name="state"
-              id="state"
+              type='text'
+              name='state'
+              id='state'
               onChange={onChange}
               value={state}
-              placeholder="State"
+              placeholder='State'
               required
             />
             <input
-              type="text"
-              name="zip"
-              id="zip"
+              type='text'
+              name='zip'
+              id='zip'
               onChange={onChange}
               value={zip}
-              placeholder="Zip"
+              placeholder='Zip'
               required
             />
             <button>Submit</button>

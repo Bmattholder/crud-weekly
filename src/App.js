@@ -1,6 +1,5 @@
-import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import PeopleList from "./components/PeopleList";
+import PeopleList from "./components/PeopleList"
 import Form from "./components/Form";
 import Nav from "./components/Nav";
 
@@ -9,8 +8,8 @@ function App() {
     <Router>
       <Nav />
       <Routes>
-        <Route path="/" element={<PeopleList />} />
-        <Route path="/form" element={<Form />} />
+        <Route path='/' element={<PeopleList />} />
+        <Route path='/form' element={<Form />} />
       </Routes>
     </Router>
   );

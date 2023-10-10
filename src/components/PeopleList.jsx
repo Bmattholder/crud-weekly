@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import Person from "./Person";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import Person from './Person';
 
-function PeopleList(props) {
+function PeopleList() {
+
   const [peopleList, setPeopleList] = useState([]);
   const [refresh, setRefresh] = useState(false);
 
