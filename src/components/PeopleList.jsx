@@ -3,12 +3,13 @@ import React, { useEffect, useState } from 'react';
 import Person from './Person';
 
 function PeopleList() {
+
   const [peopleList, setPeopleList] = useState([]);
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     const getPeople = async () => {
-      const res = await axios.get('http://localhost:8080/api/v1/people');
+      const res = await axios.get("http://localhost:8080/api/v1/people");
       const data = res.data;
       setPeopleList(data.content);
     };

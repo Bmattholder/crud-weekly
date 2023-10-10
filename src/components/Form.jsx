@@ -18,7 +18,7 @@ function Form() {
   const navigate = useNavigate();
 
   const onChange = (e) => {
-    if (e.target.name === "praenomens") {
+    if (e.target.name === 'praenomens') {
       setFormData((p) => ({
         ...p,
         [e.target.name]: e.target.value.split(),
